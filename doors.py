@@ -2,6 +2,8 @@
 import psycopg2
 import psycopg2.extras
 import sys
+import os
+import urlparse
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, _app_ctx_stack
 
@@ -25,7 +27,12 @@ def get_db():
 	"""
 	top = _app_ctx_stack.top
 	if not hasattr(top, 'postgres_db'):
-		postgres_db = psycopg2.connect(database=app.config['DATABASE'], user=app.config['DB_USERNAME'], host=app.config['HOST'],  password=app.config['DB_PASSWORD'])
+		if os.environ.get('DATABASE_URL') is None:
+			postgres_db = psycopg2.connect(database=app.config['DATABASE'], user=app.config['DB_USERNAME'], host=app.config['HOST'],  password=app.config['DB_PASSWORD'])
+		else:
+			url = urlparse.urlparse(os.environ["DATABASE_URL"])
+			postgres_db =psycopg2.connect(database=url.path[1:], user=url.username, password=url.password, host=url.hostname, port=url.port)
+
 		top.postgres_db = postgres_db
 
 	return top.postgres_db
