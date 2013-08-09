@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=entries>
+
+  {% if book %}
+  	<!--Edit html -->
+  	
+  	<form action="{{ url_for('admin_item_detail', itemid = book.ID) }}" method=post>
+  		<dl>
+  			<dt>
+  				Type: {{ book.ID }}
+  			</dt>
+  			<dd>
+  				<select name="selectType">
+  					<option value="bestparentingbook" {% if book.Type == "bestparentingbook" %} selected = "selected" {% endif %}>bestparentingbook</option>
+  				</select>
+  			</dd>
+  			<dt>Name:</dt>
+  			<dd><input name="txtName" type="text" value="{{ book.Name }}"/>  </dd>
+  			<dt>Affiliate URL:</dt>
+  			<dd><input name ="txtAffUrl" type="text" value="{{ book.AffiliateURL }}" />  </dd>
+  			<dt>Pages:</dt>
+  			<dd><input name="txtPages" type="text" value="{{ book.Pages }}" />  </dd>
+  			<dt>Desc:</dt>
+  			<dd><textarea name="txtDesc">{{ book.Desc }}</textarea>  </dd>
+  			<dt>Publisher:</dt>
+  			<dd><input name="txtPub" type="text" value="{{ book.Publisher }}" /></dd>
+  			<dt>Language:</dt>
+  			<dd><input name="txtLang" type="text" value="{{ book.Language }}" /></dd>
+  			<dt>ISBN 10:</dt>
+  			<dd><input name="txtISBN10" type="text" value="{{ book.ISBN10 }}" /></dd>
+  			<dt>ISBN 13:</dt>
+  			<dd><input name="txtISBN13" type="text" value="{{ book.ISBN13 }}" /></dd>
+  			<dt>Avg. Review:</dt>
+  			<dd><input name="txtReview" type="text" value="{{ book.AvgCustReview }}" /></dd>
+  			<dt>Rank:</dt>
+  			<dd><input name="txtRank" type="text" value="{{ book.AmazonRank }}" /></dd>
+  		</dl>
+  		<input type="submit" value="Submit" />
+  	</form>
+    
+  {% else %}
+  	<!--Add html -->
+    <form action="{{ url_for('admin_item_add') }}" method=post>
+      <dl>
+        <dt>
+          Type: 
+        </dt>
+        <dd>
+          <select name="selectType">
+            <option value="bestparentingbook" selected = "selected">bestparentingbook</option>
+          </select>
+        </dd>
+        <dt>Name:</dt>
+        <dd><input name="txtName" type="text"/>  </dd>
+        <dt>Affiliate URL:</dt>
+        <dd><input name ="txtAffUrl" type="text" />  </dd>
+        <dt>Pages:</dt>
+        <dd><input name="txtPages" type="text"  />  </dd>
+        <dt>Desc:</dt>
+        <dd><textarea name="txtDesc"></textarea>  </dd>
+        <dt>Publisher:</dt>
+        <dd><input name="txtPub" type="text" " /></dd>
+        <dt>Language:</dt>
+        <dd><input name="txtLang" type="text" /></dd>
+        <dt>ISBN 10:</dt>
+        <dd><input name="txtISBN10" type="text"  /></dd>
+        <dt>ISBN 13:</dt>
+        <dd><input name="txtISBN13" type="text" /></dd>
+        <dt>Avg. Review:</dt>
+        <dd><input name="txtReview" type="text" /></dd>
+        <dt>Rank:</dt>
+        <dd><input name="txtRank" type="text" /></dd>
+      </dl>
+      <input type="submit" value="Submit" />
+    </form>
+  {% endif %}
+  </ul>
+{% endblock %}

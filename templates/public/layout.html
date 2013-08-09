@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<title>Super man place</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link href='http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600' rel='stylesheet'>
+<style type="text/css">
+body {
+       padding-top: 90px; 
+      font-size: 16px;
+      font-family: "Open Sans",serif;
+      background-color: #563d7c;
+  }
+</style>
+<body>
+<div class="navbar navbar-fixed-top navbar-inverse">
+	<div class="container">
+	  <a class="navbar-brand" href="/">Best parenting books</a>
+	  <div class="nav-collapse collapse bs-navbar-collapse">
+	  <ul class="nav navbar-nav">
+	    <li><a href="/most-populer">Most populer</a></li>
+	    <li><a href="/top-10">Top 10</a></li>
+	  </ul>
+	  </div>
+  </div>
+</div>
+
+<div class="container">
+  
+  {% block body %}{% endblock %}
+</div>
+</body>
+</html>

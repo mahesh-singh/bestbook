@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<a href="{{ url_for('admin_item_add') }}">Add new book</a>
+  <ul class=entries>
+  {% for book in books %}
+    <li><h2><a href="{{ url_for('admin_item_detail', itemid = book.ID) }}">{{ book.Name }}</a></h2>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "public/layout.html" %}
+  {% block body %}
+    {% if title %}
+      <h1>{{title}}</h1>
+    {% else %}
+     <div class="col-lg-12">
+      <h1 class="text-center">Best parenting books</h1>
+    </div>
+    {% endif %}
+    {% for book in books %}
+      
+      <div class="col-lg-12">
+        <div class="modal-content well">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-2">
+              #{{ loop.index }}
+              <a title="{{ book.Name }}" href="{{ book.AffiliateURL }}" target="_blank">
+                <img alt="{{ book.Name }}" src="/static/images/{{book.ISBN10}}.jpg" />
+              </a>
+            </div>
+            <div class="col-lg-9">
+              <h2>
+                <a title="{{ book.Name }}" href="{{ book.AffiliateURL }}" target="_blank">{{ book.Name }}</a>
+                {% if book.SubTitle %}
+                <small style="display:block">{{ book.SubTitle }}</small> 
+                {% endif %}
+              </h2>
+              <ul class="list-unstyled">
+                <li><strong>Average Customer Review: </strong> {{ book.AvgCustReview }}</li>
+                <li><strong>Amazon Best Sellers Rank: </strong> #{{ book.AmazonRank }}</li>
+                <li><strong>ISBN 10: </strong> {{ book.ISBN10 }}</li>
+                <li><strong>ISBN 13: </strong> {{ book.ISBN13 }}</li>
+                <li><strong>Pages: </strong> {{ book.Pages }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-11">
+              <p> {{ book.Desc|truncate(512, True)}} 
+                <a title="{{ book.Name }}" href="{{ book.AffiliateURL }}" 
+                target="_blank">More detail &#x2192</a> </p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+        <a title="{{ book.Name }}" class="btn btn-danger btn-lg" href="{{ book.AffiliateURL }}" 
+        target="_blank">More detail &#x2192</a>
+        </div>  
+        </div>
+      </div>
+    
+  {% endfor %}
+
+</div>  
+{% endblock %}
